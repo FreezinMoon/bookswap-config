@@ -2,8 +2,6 @@ server:
   port: 8081
 
 spring:
-  application:
-    name: auth-service
   r2dbc:
     url: r2dbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:bookswap_auth}
     username: ${DB_USER:bookswap}

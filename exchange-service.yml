@@ -2,8 +2,6 @@ server:
   port: 8083
 
 spring:
-  application:
-    name: exchange-service
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:bookswap_exchanges}
     username: ${DB_USER:bookswap}
@@ -43,9 +41,8 @@ resilience4j:
         failure-rate-threshold: 50
         wait-duration-in-open-state: 10000
         permitted-number-of-calls-in-half-open-state: 3
-        automatic-transition-from-open-to-half-open-enabled: true
 
 logging:
   level:
     dev.petr.exchange: DEBUG
-    feign: DEBUG
+    dev.petr.exchange.client: DEBUG

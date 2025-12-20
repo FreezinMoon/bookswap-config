@@ -2,8 +2,6 @@ server:
   port: 8082
 
 spring:
-  application:
-    name: book-service
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:bookswap_books}
     username: ${DB_USER:bookswap}
@@ -28,5 +26,3 @@ spring:
 logging:
   level:
     dev.petr.book: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
