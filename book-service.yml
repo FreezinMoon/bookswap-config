@@ -23,6 +23,16 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
 
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: false
+  servers:
+    - url: http://localhost:8080
+      description: Gateway
+
 logging:
   level:
     dev.petr.book: DEBUG
