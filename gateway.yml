@@ -31,34 +31,6 @@ spring:
           filters:
             - JwtAuthenticationFilter
 
-        - id: auth-service-swagger
-          uri: lb://auth-service
-          predicates:
-            - Path=/auth/v3/api-docs,/auth/swagger-ui/**
-          filters:
-            - RewritePath=/auth/(?<segment>.*), /$\{segment}
-
-        - id: book-service-swagger
-          uri: lb://book-service
-          predicates:
-            - Path=/books/v3/api-docs,/books/swagger-ui/**
-          filters:
-            - RewritePath=/books/(?<segment>.*), /$\{segment}
-
-        - id: exchange-service-swagger
-          uri: lb://exchange-service
-          predicates:
-            - Path=/exchanges/v3/api-docs,/exchanges/swagger-ui/**
-          filters:
-            - RewritePath=/exchanges/(?<segment>.*), /$\{segment}
-
-        - id: publication-service-swagger
-          uri: lb://publication-service
-          predicates:
-            - Path=/publications/v3/api-docs,/publications/swagger-ui/**
-          filters:
-            - RewritePath=/publications/(?<segment>.*), /$\{segment}
-
       globalcors:
         cors-configurations:
           '[/**]':
@@ -83,13 +55,15 @@ springdoc:
     path: /swagger-ui.html
     urls:
       - name: Auth Service
-        url: /auth/v3/api-docs
+        url: http://localhost:8081/v3/api-docs
       - name: Book Service
-        url: /books/v3/api-docs
+        url: http://localhost:8082/v3/api-docs
       - name: Exchange Service
-        url: /exchanges/v3/api-docs
+        url: http://localhost:8083/v3/api-docs
       - name: Publication Service
-        url: /publications/v3/api-docs
+        url: http://localhost:8084/v3/api-docs
+  api-docs:
+    enabled: true
 
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
