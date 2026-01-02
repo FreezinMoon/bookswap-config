@@ -31,6 +31,18 @@ spring:
           filters:
             - JwtAuthenticationFilter
 
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/v1/notifications/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: notification-websocket
+          uri: lb://notification-service
+          predicates:
+            - Path=/ws/notifications/**
+
         - id: auth-service-docs
           uri: lb://auth-service
           predicates:
@@ -59,6 +71,13 @@ spring:
           filters:
             - RewritePath=/publications/v3/api-docs, /v3/api-docs
 
+        - id: notification-service-docs
+          uri: lb://notification-service
+          predicates:
+            - Path=/notifications/v3/api-docs
+          filters:
+            - RewritePath=/notifications/v3/api-docs, /v3/api-docs
+
       globalcors:
         cors-configurations:
           '[/**]':
@@ -77,7 +96,6 @@ spring:
               - Authorization
             maxAge: 3600
 
-# Агрегированный Swagger
 springdoc:
   swagger-ui:
     enabled: true
@@ -91,6 +109,8 @@ springdoc:
         url: /exchanges/v3/api-docs
       - name: Publication Service
         url: /publications/v3/api-docs
+      - name: Notification Service
+        url: /notifications/v3/api-docs
 
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
