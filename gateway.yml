@@ -78,6 +78,25 @@ spring:
           filters:
             - RewritePath=/notifications/v3/api-docs, /v3/api-docs
 
+        - id: file-service
+          uri: lb://file-service
+          predicates:
+            - Path=/api/v1/files/**
+          filters:
+            - JwtAuthenticationFilter
+
+        - id: file-websocket
+          uri: lb://file-service
+          predicates:
+            - Path=/ws/files/**
+
+        - id: file-service-docs
+          uri: lb://file-service
+          predicates:
+            - Path=/files/v3/api-docs
+          filters:
+            - RewritePath=/files/v3/api-docs, /v3/api-docs
+
       globalcors:
         cors-configurations:
           '[/**]':
@@ -111,6 +130,8 @@ springdoc:
         url: /publications/v3/api-docs
       - name: Notification Service
         url: /notifications/v3/api-docs
+      - name: File Service
+        url: /files/v3/api-docs
 
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
